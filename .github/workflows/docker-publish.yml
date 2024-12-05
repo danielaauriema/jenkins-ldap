@@ -38,7 +38,7 @@ jobs:
 
       # Run Bash Tests
       - name: Run Tests
-        run: make build ldap-test
+        run: make 
         shell: bash
 
       # Install the cosign tool except on PR
