@@ -1,7 +1,7 @@
 services:
   ldap-server:
-    image: ghcr.io/danielaauriema/docker-openldap:latest
-    container_name: ldap-server
+    image: ghcr.io/danielaauriema/openldap:latest
+    container_name: ldap-test
     environment:
       LDAP_DOMAIN: "jenkins.local"
       LDAP_BASE_DN: "dc=jenkins,dc=local"
@@ -9,18 +9,25 @@ services:
       LDAP_BIND_PASSWORD: "password"
       LDAP_DEFAULT_USERNAME: "jenkins"
       LDAP_DEFAULT_PASSWORD: "password"
+    networks:
+      - jenkins-test
 
-  jenkins-ldap:
-    build: .
-    container_name: jenkins-ldap
-    depends_on:
-      - ldap-server
-    ports:
-      - "8080:8080"
-    environment:
-      LDAP_SERVER: "ldap://ldap-server"
-      LDAP_BASE_DN: "dc=jenkins,dc=local"
-      LDAP_BIND_DN: "cn=bind,dc=jenkins,dc=local"
-      LDAP_BIND_PASSWORD: "password"
+#  jenkins-ldap:
+#    build: .
+#    container_name: jenkins-ldap
+#    depends_on:
+#      - ldap-server
+#    ports:
+#      - "8080:8080"
+#    environment:
+#      LDAP_SERVER: "ldap://ldap-server"
+#      LDAP_BASE_DN: "dc=jenkins,dc=local"
+#      LDAP_BIND_DN: "cn=bind,dc=jenkins,dc=local"
+#      LDAP_BIND_PASSWORD: "password"
 
 #  curl -k -u jenkins:password http://localhost:8080/metrics/currentUser/ping
+
+networks:
+  jenkins-test:
+    name: jenkins-test
+    driver: bridge
