@@ -1,10 +1,10 @@
 #!/bin/bash
 set -e
 
-if [ ! -f "./bash-test.sh" ]; then
+if [ ! -f "/opt/test/bash-test.sh" ]; then
   curl -s "https://raw.githubusercontent.com/danielaauriema/bash-tools/master/lib/bash-test.sh" > "/opt/test/bash-test.sh"
 fi
-if [ ! -f "./bash-wait.sh" ]; then
+if [ ! -f "/opt/test/bash-wait.sh" ]; then
   curl -s "https://raw.githubusercontent.com/danielaauriema/bash-tools/master/lib/bash-wait.sh" > "/opt/test/bash-wait.sh"
 fi
 
