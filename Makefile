@@ -32,7 +32,7 @@ ci-test: up
 	$(DOCKER_PARAMS) \
 	$(IMG_TAG)
 
-	@docker exec -u root jenkins-test chmod -R +rwx /opt/test
+	@docker exec -u root jenkins-test chmod -R ugo+rwx /opt/test
 	@docker exec jenkins-test /bin/bash -c '$(CMD)'
 
 	@$(MAKE) down
