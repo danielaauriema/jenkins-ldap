@@ -10,7 +10,7 @@ DOCKER_PARAMS=--env-file .env \
 
 DOCKER_DOWN=docker compose down --remove-orphans
 
-.PHONI: build run
+.PHONI: build test ci-test run up down
 
 build:
 	@docker build --no-cache -t $(IMG_TAG) .
@@ -40,7 +40,6 @@ ci-test: up
 run: up
 	@docker run -it --rm \
 	-p "8080:8080" \
-	$(V_STARTUP) \
 	$(DOCKER_PARAMS) \
 	$(IMG_TAG)
 	@$(DOCKER_DOWN)
